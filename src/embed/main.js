@@ -57,7 +57,7 @@ var volume = 0;
 
 function onLoad() {
   if (!Util.isWebGLEnabled()) {
-    showError('WebGL not supported.');
+    showError('WebGL not supported. Please scroll down for help.');
     return;
   }
 
@@ -74,32 +74,39 @@ function onLoad() {
     WebVRConfig = window.WebVRConfig || {};
     WebVRConfig.YAW_ONLY = true;
   }
+  var webVrButtons = document.querySelectorAll('.webvr-button')
+  var fullscreen = webVrButtons[0];
+  fullscreen.parentNode.removeChild(fullscreen);
+  var vrMode = webVrButtons[1];
+  vrMode.style.right = 0;
+  vrMode.style.top = 0;
 
   requestAnimationFrame(loop);
 }
 
 
-function onVideoTap() {
-  worldRenderer.videoProxy.play();
-  hidePlayButton();
+// function onVideoTap() {
+//   worldRenderer.videoProxy.play();
+//   hidePlayButton();
 
-  // Prevent multiple play() calls on the video element.
-  document.body.removeEventListener('touchend', onVideoTap);
-}
+//   // Prevent multiple play() calls on the video element.
+//   document.body.removeEventListener('touchend', onVideoTap);
+// }
 
 function onRenderLoad(event) {
   if (event.videoElement) {
 
     var scene = SceneInfo.loadFromGetParams();
 
+
     // On mobile, tell the user they need to tap to start. Otherwise, autoplay.
-    if (Util.isMobile()) {
-      // Tell user to tap to start.
-      showPlayButton();
-      document.body.addEventListener('touchend', onVideoTap);
-    } else {
-      event.videoElement.play();
-    }
+    // if (Util.isMobile()) {
+    //   // Tell user to tap to start.
+    //   showPlayButton();
+    //   document.body.addEventListener('touchend', onVideoTap);
+    // } else {
+      // event.videoElement.play();
+    // }
 
     // Attach to pause and play events, to notify the API.
     event.videoElement.addEventListener('pause', onPause);
@@ -286,15 +293,15 @@ function hideError() {
   error.classList.remove('visible');
 }
 
-function showPlayButton() {
-  var playButton = document.querySelector('#play-overlay');
-  playButton.classList.add('visible');
-}
+// function showPlayButton() {
+//   var playButton = document.querySelector('#play-overlay');
+//   playButton.classList.add('visible');
+// }
 
-function hidePlayButton() {
-  var playButton = document.querySelector('#play-overlay');
-  playButton.classList.remove('visible');
-}
+// function hidePlayButton() {
+//   var playButton = document.querySelector('#play-overlay');
+//   playButton.classList.remove('visible');
+// }
 
 function showStats() {
   stats.setMode(0); // 0: fps, 1: ms
