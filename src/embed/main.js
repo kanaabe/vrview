@@ -80,6 +80,9 @@ function onLoad() {
   var vrMode = webVrButtons[1];
   vrMode.style.right = 0;
   vrMode.style.top = 0;
+  vrMode.style.border = '1px solid white';
+  vrMode.style.margin = '15px';
+  vrMode.style['background-color'] = 'rgba(0,0,0,0.5)';
 
   requestAnimationFrame(loop);
 }
