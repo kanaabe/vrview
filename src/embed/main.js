@@ -57,7 +57,8 @@ var volume = 0;
 
 function onLoad() {
   if (!Util.isWebGLEnabled()) {
-    showError('WebGL not supported. Please scroll down for help.');
+    showError('Sorry, your browser is not supported. Please scroll down for help.');
+    onApiError('Sorry, your browser is not supported. Please scroll down for help.');
     return;
   }
 
@@ -273,10 +274,12 @@ function onEnded() {
 
 function onSceneError(message) {
   showError('Loader: ' + message);
+  onApiError('Sorry, video could not be played. Please scroll down for help.');
 }
 
 function onRenderError(message) {
   showError('Render: ' + message);
+  onApiError('Sorry, video could not be played. Please scroll down for help.');
 }
 
 function showError(message, opt_title) {

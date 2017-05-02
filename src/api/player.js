@@ -179,6 +179,8 @@ Player.prototype.onMessage_ = function(event) {
     case 'ready':
     case 'modechange':
     case 'error':
+      this.emit('error', data)
+      break;
     case 'click':
     case 'ended':
       if (type === 'ready') {
